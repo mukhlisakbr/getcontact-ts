@@ -1,20 +1,21 @@
-# Urip GetContact
+# Getcontact TS
 
-(Not Working Anymore)
+Unofficial Getcontact Library in Typescript
 
-an unofficial api wrapper for getcontact
+## Install
 
-### How to Install
 ```bash
-npm install subekti404dev/urip-getcontact
+yarn add mukhlisakbr/getcontact-ts
 ```
-### How to Use
-```javascript
-const UripGetContact = require('urip-getcontact');
 
-const getContact = new UripGetContact("GETCONTACT_TOKEN", "GETCONTACT_KEY");
+## Usage
 
-getContact.checkNumber("087711223344")
+```typescript
+import Getcontact from 'getcontact-ts';
+
+const getcontact = new Getcontact("GETCONTACT_TOKEN", "GETCONTACT_KEY");
+
+getcontact.checkNumber("08123456789")
     .then((data) => {
         console.log(data);
     })
@@ -23,18 +24,22 @@ getContact.checkNumber("087711223344")
     })
 ```
 
-### How to Get Token
+## How to Get Token
+
 Requirements: Android with ROOT-rights (or emulator).
 
 - Install and login into getcontact
 - Open in filemanager of phone `/data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml`
 
-```
+```bash
 GETCONTACT_KEY: FINAL_KEY
 GETCONTACT_TOKEN: TOKEN
 ```
 
-### Video Tutorial
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=sFuAMxQLVdg" target="_blank">
- <img src="http://img.youtube.com/vi/sFuAMxQLVdg/mqdefault.jpg" alt="Watch the video" width="320" height="180" border="10" />
-</a>
+Video Tutorial:
+
+[![video tutorial](https://img.youtube.com/vi/sFuAMxQLVdg/0.jpg)](https://www.youtube.com/watch?v=sFuAMxQLVdg)
+
+## Credits
+
+[@subekti404dev](https://github.com/subekti404dev)
