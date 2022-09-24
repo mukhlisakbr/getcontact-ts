@@ -1,8 +1,8 @@
 {
-  "name": "urip-getcontact",
+  "name": "getcontact-ts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,5 +12,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "crypto-js": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/node": "^18.7.20"
   }
 }

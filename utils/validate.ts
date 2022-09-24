@@ -1,4 +1,4 @@
-module.exports = async (number) => {
+export default async (number: string) => {
   if (!number) throw new Error("Number is not defined");
   if (number?.startsWith("0")) {
     number = "+62" + number.substring(1);

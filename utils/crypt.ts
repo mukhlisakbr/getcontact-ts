@@ -1,22 +1,23 @@
+import cryptoJs from "crypto-js";
 const {
   AES,
-  mode: { ECB },
   HmacSHA256,
-  enc: { Hex, Utf8, Base64 },
-} = require("crypto-js");
+  mode: { ECB },
+  enc: { Hex, Base64, Utf8 },
+} = cryptoJs;
 
 const opt = { mode: ECB };
 
-module.exports = {
-  encrypt: (data, finalKey = "") =>
+export default {
+  encrypt: (data: any, finalKey = "") =>
     AES.encrypt(data, Hex.parse(finalKey), opt)?.toString(),
-  decrypt: (data, finalKey = "") =>
+  decrypt: (data: { toString: () => any }, finalKey = "") =>
     AES.decrypt(data.toString(), Hex.parse(finalKey), opt)?.toString(Utf8),
-  signature: (timestamp, decryptMessage, key = "") => {
+  signature: (timestamp: any, decryptMessage: any, key = "") => {
     return HmacSHA256(
       `${timestamp}-${decryptMessage}`,
       Hex.parse(key)
     )?.toString(Base64);
   },
-  hexToUtf8: (hex) => Hex.parse(hex).toString(Utf8),
+  hexToUtf8: (hex: any) => Hex.parse(hex).toString(Utf8),
 };

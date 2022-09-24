@@ -1,5 +1,6 @@
-const { hexToUtf8 } = require("./crypt");
+import crypt from "./crypt";
+import axios from "axios";
 
-module.exports = async (hexUrl, data, headers) => {
-  return require("axios").default.post(hexToUtf8(hexUrl), { data }, { headers });
+export default async (hexUrl: any, data: any, headers: any) => {
+  return axios.post(crypt.hexToUtf8(hexUrl), { data }, { headers });
 };
