@@ -2,6 +2,7 @@ const encryptedEndpoint = `793167597c4a25263656206b5469243e5f416c69385d2f7843716
 import crypt from "./utils/crypt";
 import validate from "./utils/validate";
 import request from "./utils/request";
+import { GetcontactResponse } from "./types";
 
 class Getcontact {
   token: string;
@@ -47,20 +48,12 @@ class Getcontact {
         crypt.encrypt(JSON.stringify(postData), this.finalKey),
         headers
       );
-      const jsonRes = JSON.parse(crypt.decrypt(res?.data?.data, this.finalKey));
-      console.log(jsonRes);
-      return {
-        number,
-        tags: (jsonRes?.result?.tags || []).map((t: { tag: any }) => t.tag),
-      };
+      const decryptedRes: GetcontactResponse = JSON.parse(
+        crypt.decrypt(res?.data?.data, this.finalKey)
+      );
+      return decryptedRes;
     } catch (error: any) {
-      if (error.response) {
-        const encryptedErr = error.response.data.data;
-        const errMsg = encryptedErr
-          ? crypt.decrypt(encryptedErr, this.finalKey)
-          : error.message || "Something went wrong";
-        throw new Error(errMsg);
-      }
+      throw new Error(error);
     }
   }
 }
