@@ -53,7 +53,17 @@ class Getcontact {
       );
       return decryptedRes;
     } catch (error: any) {
-      throw new Error(error);
+      if (error.response) {
+        const decryptedErr = crypt.decrypt(
+          error.response.data.data,
+          this.finalKey
+        );
+        throw new Error(decryptedErr);
+      } else if (error.request) {
+        throw new Error(error.request);
+      } else {
+        throw new Error(error);
+      }
     }
   }
 }
