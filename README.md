@@ -5,7 +5,7 @@ Unofficial Getcontact Library in Typescript
 ## Install
 
 ```bash
-yarn add mukhlisakbr/getcontact-ts
+yarn add getcontact-ts
 ```
 
 ## Usage

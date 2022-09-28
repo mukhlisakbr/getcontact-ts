@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mukhlisakbr/getcontact-ts.git"
+    "url": "https://github.com/mukhlisakbr/getcontact-ts.git"
   },
   "keywords": [
     "getcontact"
