@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "jest",
-    "postinstall": "build"
+    "postinstall": "yarn build"
   },
   "keywords": [],
   "author": "",
