@@ -1,11 +1,17 @@
 export interface GetcontactResponse {
   meta: Meta;
   result: Result;
+  phoneNumber: string;
+  countryCode: string;
+  adSettings: AdSettings;
+  subscriptionInfo: SubscriptionInfo;
 }
 
 export interface Meta {
   requestId: string;
   httpStatusCode: number;
+  errorMessage: string;
+  errorCode: string;
 }
 
 export interface Result {
