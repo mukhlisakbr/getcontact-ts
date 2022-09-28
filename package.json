@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepack": "build"
   },
   "keywords": [],
   "author": "",
