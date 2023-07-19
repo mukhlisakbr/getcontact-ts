@@ -13,16 +13,17 @@ npm i getcontact-ts
 ```typescript
 import Getcontact from "getcontact-ts";
 
-const getcontact = new Getcontact("GETCONTACT_TOKEN", "GETCONTACT_KEY");
-
-getcontact
-  .checkNumber("08123456789")
-  .then((data) => {
+async function fetchContactData() {
+  try {
+    const getcontact = new Getcontact("GETCONTACT_TOKEN", "GETCONTACT_KEY");
+    const data = await getcontact.checkNumber("08123456789");
     console.log(data);
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log(err);
-  });
+  }
+}
+
+fetchContactData();
 ```
 
 ## How to Get Token
