@@ -1,24 +1,42 @@
 import cryptoJs from "crypto-js";
 
-const {
-  AES,
-  HmacSHA256,
-  mode: { ECB },
-  enc: { Hex, Base64, Utf8 },
-} = cryptoJs;
+const { AES, HmacSHA256, mode, enc } = cryptoJs;
 
-const opt = { mode: ECB };
+const aesOptions = { mode: mode.ECB };
+const encUtf8 = enc.Utf8;
+const encHex = enc.Hex;
+const encBase64 = enc.Base64;
 
-export default {
-  encrypt: (data: any, finalKey = "") =>
-    AES.encrypt(data, Hex.parse(finalKey), opt)?.toString(),
-  decrypt: (data: { toString: () => any }, finalKey = "") =>
-    AES.decrypt(data.toString(), Hex.parse(finalKey), opt)?.toString(Utf8),
-  signature: (timestamp: any, decryptMessage: any, key = "") => {
-    return HmacSHA256(
-      `${timestamp}-${decryptMessage}`,
-      Hex.parse(key)
-    )?.toString(Base64);
+const cryptoUtils = {
+  encrypt: (data: any, finalKey: string = ""): string => {
+    const encrypted = AES.encrypt(data, encHex.parse(finalKey), aesOptions);
+    return encrypted ? encrypted.toString() : "";
   },
-  hexToUtf8: (hex: any) => Hex.parse(hex).toString(Utf8),
+
+  decrypt: (data: any, finalKey: string = ""): string => {
+    const decrypted = AES.decrypt(
+      data.toString(),
+      encHex.parse(finalKey),
+      aesOptions
+    );
+    return decrypted ? decrypted.toString(encUtf8) : "";
+  },
+
+  generateSignature: (
+    timestamp: any,
+    decryptMessage: any,
+    key: string = ""
+  ): string => {
+    const messageToSign = `${timestamp}-${decryptMessage}`;
+    const signature = HmacSHA256(messageToSign, encHex.parse(key))?.toString(
+      encBase64
+    );
+    return signature || "";
+  },
+
+  hexToUtf8: (hex: any): string => {
+    return encHex.parse(hex).toString(encUtf8);
+  },
 };
+
+export default cryptoUtils;

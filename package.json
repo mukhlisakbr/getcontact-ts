@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc",
-    "test": "jest",
+    "test": "jest --verbose",
     "prepare": "npm run build"
   },
   "repository": {
