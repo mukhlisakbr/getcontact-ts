@@ -1,8 +1,9 @@
-const encryptedEndpoint = `793167597c4a25263656206b5469243e5f416c69385d2f7843716d4d4d5031242a29493846774a2c2a725f59554d2034683f40372b40233c3e2b772d6533565768747470733a2f2f7062737372762d63656e7472616c6576656e74732e636f6d2f76322e382f6e756d6265722d64657461696c`;
-import crypt from "./utils/crypt";
+import crypto from "./utils/crypto";
 import validate from "./utils/validate";
 import request from "./utils/request";
 import { GetcontactResponse } from "./types";
+
+const encryptedEndpoint = `793167597c4a25263656206b5469243e5f416c69385d2f7843716d4d4d5031242a29493846774a2c2a725f59554d2034683f40372b40233c3e2b772d6533565768747470733a2f2f7062737372762d63656e7472616c6576656e74732e636f6d2f76322e382f6e756d6265722d64657461696c`;
 
 class Getcontact {
   token: string;
@@ -25,7 +26,7 @@ class Getcontact {
         token: this.token,
       };
       const timestamp = Date.now().toString();
-      const signature = crypt.signature(
+      const signature = crypto.signature(
         timestamp,
         JSON.stringify(postData),
         encryptedEndpoint.replace(encryptedEndpoint.substring(128), "")
@@ -45,16 +46,16 @@ class Getcontact {
       };
       const res = await request(
         encryptedEndpoint.substring(128),
-        crypt.encrypt(JSON.stringify(postData), this.finalKey),
+        crypto.encrypt(JSON.stringify(postData), this.finalKey),
         headers
       );
       const decryptedRes: GetcontactResponse = JSON.parse(
-        crypt.decrypt(res?.data?.data, this.finalKey)
+        crypto.decrypt(res?.data?.data, this.finalKey)
       );
       return decryptedRes;
     } catch (error: any) {
       if (error.response) {
-        const decryptedErr = crypt.decrypt(
+        const decryptedErr = crypto.decrypt(
           error.response.data.data,
           this.finalKey
         );
