@@ -2,7 +2,7 @@ import cryptoUtils from "./utils/crypto";
 import validate from "./utils/validate";
 import request from "./utils/request";
 import { GetcontactResponse } from "./types";
-
+import { isBase64 } from "./utils/is-base64";
 const encryptedEndpoint = `793167597c4a25263656206b5469243e5f416c69385d2f7843716d4d4d5031242a29493846774a2c2a725f59554d2034683f40372b40233c3e2b772d6533565768747470733a2f2f7062737372762d63656e7472616c6576656e74732e636f6d2f76322e382f6e756d6265722d64657461696c`;
 
 class Getcontact {
@@ -78,14 +78,6 @@ class Getcontact {
         throw new Error(error.message);
       }
     }
-  }
-}
-
-function isBase64(str: string) {
-  try {
-    return btoa(atob(str)) === str;
-  } catch (err) {
-    return false;
   }
 }
 
